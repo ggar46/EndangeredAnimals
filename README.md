@@ -16,5 +16,5 @@ Create full stack apps with React and Express. Run your client, server and do a 
 9. Inside your server file: run the command `psql -U postgres -f db.sql` to restore the DB from the file db.sql
 10. Go to the cliente folder (`cd .. and cd client`) and run the command `npm start`
 11. Both server should run now with `npm start`
-12. Go to localhost:3000 and you should see something like this
+12. Go to localhost:3000 and you will see something like this
 [!You will something like this in your terminal.](https://github.com/Yosolita1978/screenshoots/blob/main/template/Screen%20Shot%202022-03-20%20at%208.58.13%20PM.png?raw=true)
