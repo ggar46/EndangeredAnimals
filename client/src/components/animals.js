@@ -9,13 +9,14 @@ function Animals() {
   // New State to contro the existing student Id that the user wants to edit
   const [editAnimalId, setEditAnimalId] = useState(null);
 
-  useEffect(() => {
-    fetch("http://localhost:8085/api/animals")
-      .then((response) => response.json())
-      .then((animalsdata) => {
-            setAnimals(animalsdata);
-          });
-  }, []);
+//API CALL - all animals in animals table//--------------------------------------------------
+useEffect(() => {
+  fetch("http://localhost:8085/api/animals")
+    .then((response) => response.json())
+    .then((animals) => {
+          setAnimals(animals);
+        });
+}, []);
 
   const addAnimal = (newAnimal) => {
     //console.log(newStudent);
@@ -23,10 +24,9 @@ function Animals() {
     setAnimals((animal) => [...animals, newAnimal]);
   };
 
-  //A function to control the update in the parent (student component)
-
+//A function to control the update in the parent (student component)--------------------------------
   const updateAnimal = (savedAnimal) =>{
-    console.log("Line 29 savedAnimal", savedAnimal);cd
+    console.log("Line 29 savedAnimal", savedAnimal);
     // This function should update the whole list of students - 
     setAnimals((animals) => {
       const newArrayAnimals = [];
@@ -43,6 +43,7 @@ function Animals() {
     setEditAnimalId(null);
   }
   
+////--------------------------------------------------------------------------------------------------------
   const onEdit = (animal) =>{
     console.log("This is line 26 on animal component", animal);
     const editingID = animal.id;
@@ -50,6 +51,8 @@ function Animals() {
     setEditAnimalId(editingID);
   }
 
+
+////--------------------------------------------------------------------------------------------------------
   return (
     <div className="animals">
       <h2> List of Animals </h2>
