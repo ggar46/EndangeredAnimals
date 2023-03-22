@@ -26,7 +26,7 @@ function Animals() {
   //A function to control the update in the parent (student component)
 
   const updateAnimal = (savedAnimal) =>{
-    console.log("Line 29 savedAnimal", savedAnimal);
+    console.log("Line 29 savedAnimal", savedAnimal);cd
     // This function should update the whole list of students - 
     setAnimals((animals) => {
       const newArrayAnimals = [];
