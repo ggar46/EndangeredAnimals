@@ -3,13 +3,23 @@ import Form from "./form";
 
 function Animals() {
   
-  // this is my original state with an array of students 
+
   const [animals, setAnimals] = useState([]);
-
-  // New State to contro the existing student Id that the user wants to edit
   const [editAnimalId, setEditAnimalId] = useState(null);
+  const [species, setSpecies] = useState([]);
 
-//API CALL - all animals in animals table//--------------------------------------------------
+
+//API CALL - SPECIES TABLE-----------------------------------------------------------------------------------
+useEffect(() => {
+  fetch("http://localhost:8085/api/species")
+    .then((response) => response.json())
+    .then((speciesdata) => {
+          setSpecies(speciesdata);
+        });
+}, []);
+
+
+//API CALL - ANIMALS table//--------------------------------------------------
 useEffect(() => {
   fetch("http://localhost:8085/api/animals")
     .then((response) => response.json())
@@ -77,7 +87,7 @@ useEffect(() => {
           }
         })}
       </ul>
-      <Form sendData={sendData} animalsArray={animals} saveAnimal={addAnimal} />
+      <Form speciesArray={species} sendData={sendData} animalsArray={animals} saveAnimal={addAnimal} />
     </div>
   );
 }

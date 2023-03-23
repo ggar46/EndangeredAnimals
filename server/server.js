@@ -28,21 +28,25 @@ app.get('/api/animals', cors(), async (req, res) => {
 });
 
 
-//GET request - SIGHTINGS+ANIMALS JOIN*-----------------------------------------------------
+//GET request - SIGHTINGS-----------------------------------------------------
 //cannot access all sightings, is this necessary to make post req. to this table?
-// app.get('/api/sightings', cors(), async (req, res) => {
-//   try {
-//     const { rows: sightings } = await db.query('SELECT * FROM sightings');
-//     res.send(sightings);
-//   } catch (e) {
-//     return res.status(400).json({ e });
-//   }
-// });
+app.get('/api/sightings', cors(), async (req, res) => {
+  try {
+    const { rows: sightings } = await 
+    db.query('SELECT * FROM sightings');
+    res.send(sightings);
+  } catch (e) {
+    return res.status(400).json({ e });
+  }
+});
 
 
 //GET request - SPECIES-----------------------------------------------------
+//working
 app.get('/api/species', cors(), async (req, res) => {
+  console.log("species route in backend")
   try {
+    console.log("species route in backend")
     const { rows: species } = await db.query('SELECT * FROM species');
     res.send(species);
   } catch (e) {
@@ -69,9 +73,6 @@ app.get('/api/species', cors(), async (req, res) => {
 
 
 
-
-
-
 //     const insertSightings = `
 //       INSERT INTO sightings(date_of_sighting, location_of_sighting, sighter_email, healthy, id_animal)
 //       VALUES($1, $2, $3, $4, $5)
@@ -82,9 +83,6 @@ app.get('/api/species', cors(), async (req, res) => {
 //       [req.body.date_sighted, req.body.location, req.body.healthy, req.body.email, newIndividual.rows[0].individual_id]
 //     );
 //     await client.query('COMMIT');
-
-
-
 
 
 
@@ -120,7 +118,7 @@ app.get('/api/species', cors(), async (req, res) => {
 // POST request - SIGHTINGS-----------------------------------------------------
 //does not work
 //Recommendation: Put both post requests into the same one to make things easier front-end
-app.post('/api/sightings', cors(), async (req, res) => {
+app.post('/api/postsightings', cors(), async (req, res) => {
   console.log("working")
    const newSighting = {
     date_of_sighting: req.body.date_of_sighting,

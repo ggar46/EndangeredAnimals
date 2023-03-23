@@ -17,7 +17,7 @@ const Form = (props) => {
 
   // This is the original State with not initial student 
   const [sighting, setSighting] = useState(initialSighting);
-  //const [sightings, setSightings] = useState([]);
+  //const [sighting, setSighting] = useState([]);
   
 
   //create functions that handle the event of the user typing into the form//---------------------------------------------------------------------------
@@ -55,10 +55,10 @@ const Form = (props) => {
 //if there is a nickname chosen, add to animals state using
 //if there is no nickname chosen from animals,  
 //is sending nickname and associating id to sighting
-const handleAnimalIdDropdown = (event) =>{
-  const selection = event.value;
-  setSighting(selection);
-}
+// const handleAnimalIdDropdown = (event) => {
+//   const selection = event.value;
+//   setSighting(selection);
+// }
 
 
 //A function to handle animals post request----------------------------------------------------------------
@@ -85,7 +85,7 @@ const handleAnimalIdDropdown = (event) =>{
 //POST request to handle SIGHTINGS get request//-----------------------------------------------------------------
 const postSighting = (newSighting) => {
   console.log("I am in my post request");
-  return fetch("http://localhost:8085/api/sightings", {
+  return fetch("http://localhost:8085/api/postsightings", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(newSighting),
@@ -152,7 +152,7 @@ useEffect((props) => {
 //               </option>
 //             );
 //           })}
-//           <option value={-1}>create a new animal</option>
+//           <option value={-1}>add a new species</option>
 
 //         </select>
         
@@ -206,7 +206,7 @@ return (
 
     {/* referencing array of animals from the animals.js component passed as props (columns nickname and id) */}
       <label>Animal Name</label>
-         <select onChange={handleAnimalIdDropdown}>
+         <select>
          {props.animalsArray.map((element) => {
              return (
                <option value={element.id_animal}>
@@ -216,6 +216,19 @@ return (
            })}
            <option value={-1}>create a new animal</option>
          </select>
+
+
+      <label>Species</label>
+        <select>
+        {props.speciesArray.map((element) => {
+            return (
+              <option value={element.id_species}>
+                {element.species_name}{" "}
+              </option>
+            );
+          })}
+          <option value={-1}>add a new species</option>
+        </select>
 
       <label>Date of Sighting</label>
       <input
@@ -259,7 +272,7 @@ return (
 
 
     </fieldset>
-    <button type="submit">{!sighting.id_sighting ? "ADD": "SAVE"}</button>
+    <button type="submit">{!sighting.id_sighting ? "ADD SIGHTING": "SAVE SIGHTING"}</button>
   </form>
   </div>
 );
