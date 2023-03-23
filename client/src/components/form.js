@@ -1,18 +1,21 @@
 import { useState } from "react";
+import {useEffect}  from  "react";
 
 const Form = (props) => {
 
+  //QUESTION: WHY ARE WE DOING IT LIKE THIS???
   const {initialAnimal = {
                           id_animal: null, 
                           nickname: "", 
                           animal_record_timestamp: "",
                           date_of_sighting: "",
                           location_of_sighting: "",
-                          healthy: false}} = props;
+                          healthy: ""}} = props;
 
 
   // This is the original State with not initial student 
   const [animal, setAnimal] = useState(initialAnimal);
+  const [species, setSpecies] = useState([]);
 
   //create functions that handle the event of the user typing into the form//---------------------------------------------------------------------------
   const handleNicknameChange = (event) => {
@@ -22,17 +25,17 @@ const Form = (props) => {
 
 
 ////------------------------------------------------------------------------------------
-  const handleTimestampChange = (event) => {
-    const animal_record_timestamp = event.target.value;
-    setAnimal((animal) => ({ ...animal, animal_record_timestamp }));
-  };
+  // const handleTimestampChange = (event) => {
+  //   const animal_record_timestamp = event.target.value;
+  //   setAnimal((animal) => ({ ...animal, animal_record_timestamp }));
+  // };
 
 //event sighting//------------------------------------------------------------------------------------
   const handleDateOfSightingChange = (event) => {
     const date_of_sighting = event.target.value;
     setAnimal((animal) => ({ ...animal, date_of_sighting }));
   }
-  
+
 //location of sighting//-------------------------------------------------------------------------------
   const handleLocationOfSightingChange = (event) => {
     const location_of_sighting = event.target.value;
@@ -47,7 +50,10 @@ const Form = (props) => {
 
 
 
-//A function to handle the post request----------------------------------------------------------------
+//A function to handle animals post request----------------------------------------------------------------
+  //need to call both urls in the backend, the queries are synchronous (sighting/animal, animal before sighting)
+  //add error display next to submit button if the insert for one table fails
+  //put both 
   const postAnimal = (newAnimal) => {
     console.log("I am in my post request");
     return fetch("http://localhost:8085/api/animals", {
@@ -64,6 +70,15 @@ const Form = (props) => {
         props.saveAnimal(data);
       });
   };
+  
+//A function to handle SPECIES get request//-----------------------------------------------------------------
+useEffect(() => {
+  fetch("http://localhost:8085/api/species")
+    .then((response) => response.json())
+    .then((speciesdata) => {
+          setSpecies(speciesdata);
+        });
+}, []);
 
 //A function to handle the Update request//-----------------------------------------------------------------
     const updateAnimal = (existingAnimal) =>{
@@ -92,9 +107,24 @@ const Form = (props) => {
   };
 //--------------------------------------------------------------------------------------------------------
   return (
+    <div>
     <form onSubmit={handleSubmit}>
       <fieldset>
 
+        <label>Species</label>
+        <select>
+        {species.map((element) => {
+            return (
+              <option value={element.id_species}>
+                {element.species_name}{" "}
+              </option>
+            );
+          })}
+          <option value={-1}>create a new animal</option>
+
+        </select>
+        
+      
         <label>Animal Name</label>
         <input
           type="text"
@@ -135,19 +165,10 @@ const Form = (props) => {
           onChange={handleHealth}
         />
 
-
-        <label>Animal Record Timestamp</label>
-        <input
-          type="date"
-          id="add-record-timestamp"
-          placeholder="Timestamp"
-          required
-          value={animal.animal_record_timestamp}
-          onChange={handleTimestampChange}
-        />
       </fieldset>
       <button type="submit">{!animal.id_animal ? "ADD": "SAVE"}</button>
     </form>
+    </div>
   );
 };
 

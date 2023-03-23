@@ -15,9 +15,12 @@ app.get('/', (req, res) => {
 });
 
 //GET request - ANIMALS---------------------------------------------------------
+//as long as both tables share a field, you can join on them, usually a key but doesn't have to be
 app.get('/api/animals', cors(), async (req, res) => {
   try {
-    const { rows: animal } = await db.query('SELECT * FROM animal');
+    const { rows: animal } = await 
+    //db.query('SELECT * FROM animal');
+    db.query('SELECT * FROM sightings LEFT JOIN animal ON sightings.id_animal=animal.id_animal');
     res.send(animal);
   } catch (e) {
     return res.status(400).json({ e });
@@ -25,7 +28,7 @@ app.get('/api/animals', cors(), async (req, res) => {
 });
 
 
-//GET request - SIGHTINGS*-----------------------------------------------------
+//GET request - SIGHTINGS+ANIMALS JOIN*-----------------------------------------------------
 //cannot access all sightings, is this necessary to make post req. to this table?
 app.get('/api/sightings', cors(), async (req, res) => {
   try {
@@ -36,6 +39,16 @@ app.get('/api/sightings', cors(), async (req, res) => {
   }
 });
 
+
+//GET request - SPECIES-----------------------------------------------------
+app.get('/api/species', cors(), async (req, res) => {
+  try {
+    const { rows: species } = await db.query('SELECT * FROM species');
+    res.send(species);
+  } catch (e) {
+    return res.status(400).json({ e });
+  }
+});
 
 //POST request - ANIMALS-----------------------------------------------------
 //works
@@ -56,6 +69,7 @@ app.post('/api/animals', cors(), async (req, res) => {
 
 // POST request - SIGHTINGS-----------------------------------------------------
 //does not work
+//Recommendation: Put both post requests into the same one to make things easier front-end
 app.post('/api/sightings', cors(), async (req, res) => {
   console.log("working")
    const newSighting = {
