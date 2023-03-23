@@ -30,14 +30,14 @@ app.get('/api/animals', cors(), async (req, res) => {
 
 //GET request - SIGHTINGS+ANIMALS JOIN*-----------------------------------------------------
 //cannot access all sightings, is this necessary to make post req. to this table?
-app.get('/api/sightings', cors(), async (req, res) => {
-  try {
-    const { rows: sightings } = await db.query('SELECT * FROM sightings');
-    res.send(sightings);
-  } catch (e) {
-    return res.status(400).json({ e });
-  }
-});
+// app.get('/api/sightings', cors(), async (req, res) => {
+//   try {
+//     const { rows: sightings } = await db.query('SELECT * FROM sightings');
+//     res.send(sightings);
+//   } catch (e) {
+//     return res.status(400).json({ e });
+//   }
+// });
 
 
 //GET request - SPECIES-----------------------------------------------------
@@ -49,6 +49,56 @@ app.get('/api/species', cors(), async (req, res) => {
     return res.status(400).json({ e });
   }
 });
+
+
+
+// //POST request - attempt to combine ANIMALS and SIGHTINGS-----------------------------------------------------------
+// app.post('/api/sightingsanimal', cors(), async (req, res) => {
+//   const client = await db.connect();
+
+//   try {
+//     await client.query('BEGIN');
+
+//     const insertAnimals = `
+//       INSERT INTO individuals(nickname) 
+//       VALUES($1) 
+//       ON CONFLICT (nickname) DO UPDATE SET nickname = Excluded.nickname
+//       RETURNING id_animal
+//     `;
+//     const newAnimal = await client.query(insertAnimals, [req.body.nickname, newSpecies.rows[0].species_id]);
+
+
+
+
+
+
+//     const insertSightings = `
+//       INSERT INTO sightings(date_of_sighting, location_of_sighting, sighter_email, healthy, id_animal)
+//       VALUES($1, $2, $3, $4, $5)
+//       ON CONFLICT (date_of_sighting, location_of_sighting, sighter_email, healthy, id_animal) DO UPDATE SET date_of_sighting = Excluded.date_of_sighting
+//       RETURNING sightings_id
+//     `;
+//     await client.query(insertSightings, 
+//       [req.body.date_sighted, req.body.location, req.body.healthy, req.body.email, newIndividual.rows[0].individual_id]
+//     );
+//     await client.query('COMMIT');
+
+
+
+
+
+
+
+//   } catch (e) {
+//     await client.query('ROLLBACK');
+//     throw e
+
+//   } finally {
+//     client.release();
+//   }
+//   res.status(200).send("New sighting was added successfully");
+// });
+
 
 //POST request - ANIMALS-----------------------------------------------------
 //works

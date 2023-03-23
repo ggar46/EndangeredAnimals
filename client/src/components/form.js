@@ -5,24 +5,26 @@ import {useEffect}  from  "react";
 const Form = (props) => {
 
   const {initialAnimal = {
-                          id_animal: null, 
+                       
                           nickname: "", 
                           animal_record_timestamp: "",
                           date_of_sighting: "",
                           location_of_sighting: "",
+                          id_animal: "",
+                          healthy: "",
                           }} = props;
 
 
   // This is the original State with not initial student 
   const [animal, setAnimal] = useState(initialAnimal);
-  const [species, setSpecies] = useState([]);
-  const [animals, setAnimals] = useState([]);
+  //const [species, setSpecies] = useState([]);
+  
 
   //create functions that handle the event of the user typing into the form//---------------------------------------------------------------------------
-  const handleNicknameChange = (event) => {
-    const nickname = event.target.value;
-    setAnimal((animal) => ({ ...animal, nickname}));
-  };
+  // const handleNicknameChange = (event) => {
+  //   const nickname = event.target.value;
+  //   setAnimal((animal) => ({ ...animal, nickname}));
+  // };
 
 //event sighting//------------------------------------------------------------------------------------
   const handleDateOfSightingChange = (event) => {
@@ -42,6 +44,20 @@ const Form = (props) => {
     setAnimal((animal) => ({ ...animal, email}));
   }
 
+//health---------------------------------------------------------------------------------
+  const handleAnimalHealth = (event) => {
+    const animalhealth = event.target.value;
+    setAnimal((animal) => ({ ...animal, animalhealth}));
+  }
+
+
+//event handler for animal dropdown----------------------------------------------------------------------------
+//if there is a nickname chosen, add to animals state using
+//if there is no nickname chosen from animals,  
+const handleAnimalDropdown = (event) =>{
+  const selection = event.value;
+  setAnimal((animal) => ({...animal, selection}));
+}
 
 
 //A function to handle animals post request----------------------------------------------------------------
@@ -66,21 +82,21 @@ const Form = (props) => {
   };
   
 //A function to handle SPECIES get request//-----------------------------------------------------------------
-useEffect(() => {
-  fetch("http://localhost:8085/api/species")
-    .then((response) => response.json())
-    .then((speciesdata) => {
-          setSpecies(speciesdata);
-        });
-}, []);
+// useEffect(() => {
+//   fetch("http://localhost:8085/api/species")
+//     .then((response) => response.json())
+//     .then((speciesdata) => {
+//           setSpecies(speciesdata);
+//         });
+// }, []);
 
 
 //ANIMALS get request setting animals state (A repeat)-----------------------------------------------------------------
-useEffect(() => {
+useEffect((props) => {
   fetch("http://localhost:8085/api/animals")
     .then((response) => response.json())
     .then((animals) => {
-          setAnimals(animals);
+          props.sendData(animals);
         });
 }, []);
 
@@ -98,6 +114,7 @@ useEffect(() => {
       });
 
   }
+
 
 //Submit Button Event Handler----------------------------------------------------------------------------
   const handleSubmit = (e) => {
@@ -167,17 +184,20 @@ useEffect(() => {
 //   );
 // };
 
+
+//return to sightings
+//need to add species dropdown and also make 
 return (
-  <div>
+  <div  id="formdiv">
   <form onSubmit={handleSubmit}>
     <fieldset>
     
       <label>Animal Name</label>
-         <select>
-         {animals.map((element) => {
+         <select onChange={handleAnimalDropdown}>
+         {props.animalsArray.map((element) => {
              return (
                <option value={element.id_animal}>
-                 {element.nickname}{" "}
+                 {element.nickname}
                </option>
              );
            })}
@@ -212,6 +232,16 @@ return (
         required
         value={animal.sighter_email}
         onChange={handleEmail}
+      />
+
+      <label>Health</label>
+      <input
+        type="text"
+        id="add-health"
+        placeholder="Health Status"
+        required
+        value={animal.healthy}
+        onChange={handleAnimalHealth}
       />
 
 
