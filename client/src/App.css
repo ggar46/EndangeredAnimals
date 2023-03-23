@@ -36,3 +36,16 @@
     transform: rotate(360deg);
   }
 }
+
+form{
+  padding: remy(32px);
+ margin-top: 2rem;
+ margin-right: auto;
+ margin-left: auto;
+ max-width: remy(380px);
+ background-color: #fff;
+ border-radius: $radius;
+ box-shadow: 0 15px 35px rgba(50,50,93,.1),0 5px 15px rgba(0,0,0,.07);
+}
+
+
