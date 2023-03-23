@@ -4,7 +4,7 @@ import {useEffect}  from  "react";
 
 const Form = (props) => {
 
-  const {initialAnimal = {
+  const {initialSighting = {
                        
                           nickname: "", 
                           animal_record_timestamp: "",
@@ -16,8 +16,8 @@ const Form = (props) => {
 
 
   // This is the original State with not initial student 
-  const [animal, setAnimal] = useState(initialAnimal);
-  //const [species, setSpecies] = useState([]);
+  const [sighting, setSighting] = useState(initialSighting);
+  //const [sightings, setSightings] = useState([]);
   
 
   //create functions that handle the event of the user typing into the form//---------------------------------------------------------------------------
@@ -29,34 +29,35 @@ const Form = (props) => {
 //event sighting//------------------------------------------------------------------------------------
   const handleDateOfSightingChange = (event) => {
     const date_of_sighting = event.target.value;
-    setAnimal((animal) => ({ ...animal, date_of_sighting }));
+    setSighting((sighting) => ({ ...sighting, date_of_sighting }));
   }
 
 //location of sighting//-------------------------------------------------------------------------------
   const handleLocationOfSightingChange = (event) => {
     const location_of_sighting = event.target.value;
-    setAnimal((animal) => ({ ...animal, location_of_sighting }));
+    setSighting((sighting) => ({ ...sighting, location_of_sighting }));
   }
 
 //email-----------------------------------------------------------------------------------
   const handleEmail = (event) => {
     const email = event.target.value;
-    setAnimal((animal) => ({ ...animal, email}));
+    setSighting((sighting) => ({ ...sighting, email}));
   }
 
 //health---------------------------------------------------------------------------------
-  const handleAnimalHealth = (event) => {
-    const animalhealth = event.target.value;
-    setAnimal((animal) => ({ ...animal, animalhealth}));
+  const handleSightingHealth = (event) => {
+    const healthy = event.target.value;
+    setSighting((sighting) => ({ ...sighting, healthy}));
   }
 
 
-//event handler for animal dropdown----------------------------------------------------------------------------
+//event handler for animal  dropdown----------------------------------------------------------------------------
 //if there is a nickname chosen, add to animals state using
 //if there is no nickname chosen from animals,  
-const handleAnimalDropdown = (event) =>{
+//is sending nickname and associating id to sighting
+const handleAnimalIdDropdown = (event) =>{
   const selection = event.value;
-  setAnimal((animal) => ({...animal, selection}));
+  setSighting(selection);
 }
 
 
@@ -64,66 +65,76 @@ const handleAnimalDropdown = (event) =>{
   //need to call both urls in the backend, the queries are synchronous (sighting/animal, animal before sighting)
   //add error display next to submit button if the insert for one table fails
   //put both 
-  const postAnimal = (newAnimal) => {
-    console.log("I am in my post request");
-    return fetch("http://localhost:8085/api/animals", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newAnimal),
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        console.log("From the post ", data);
-        console.log("postAnimal is working")
-        props.saveAnimal(data);
-      });
-  };
+  // const postAnimal = (newAnimal) => {
+  //   console.log("I am in my post request");
+  //   return fetch("http://localhost:8085/api/animals", {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify(newAnimal),
+  //   })
+  //     .then((response) => {
+  //       return response.json();
+  //     })
+  //     .then((data) => {
+  //       console.log("From the post ", data);
+  //       console.log("postAnimal is working")
+  //       props.saveAnimal(data);
+  //     });
+  // };
   
-//A function to handle SPECIES get request//-----------------------------------------------------------------
-// useEffect(() => {
-//   fetch("http://localhost:8085/api/species")
-//     .then((response) => response.json())
-//     .then((speciesdata) => {
-//           setSpecies(speciesdata);
-//         });
-// }, []);
+//POST request to handle SIGHTINGS get request//-----------------------------------------------------------------
+const postSighting = (newSighting) => {
+  console.log("I am in my post request");
+  return fetch("http://localhost:8085/api/sightings", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(newSighting),
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      console.log("From the post ", data);
+      console.log("postSighting is working")
+      setSighting((sighting) => ({ ...sighting, data}));
+    });
+};
 
 
 //ANIMALS get request setting animals state (A repeat)-----------------------------------------------------------------
 useEffect((props) => {
-  fetch("http://localhost:8085/api/animals")
+  fetch("http://localhost:8085/api/sightings")
     .then((response) => response.json())
-    .then((animals) => {
-          props.sendData(animals);
+    .then((sightings) => {
+          props.sendData(sightings);
         });
 }, []);
 
 //A function to handle the Update request//-----------------------------------------------------------------
-    const updateAnimal = (existingAnimal) =>{
-      return fetch(`http://localhost:8085/api/animals/${existingAnimal.id}`, {
-          method: 'PUT',
-          headers: {'Content-Type': 'application/json'}, 
-          body: JSON.stringify(existingAnimal)
-        }).then((response) => {
-            return response.json()
-        }).then((data) => {
-          console.log("From put request ", data);
-          props.saveAnimal(data);
-      });
+  //   const updateAnimal = (existingAnimal) =>{
+  //     return fetch(`http://localhost:8085/api/animals/${existingAnimal.id}`, {
+  //         method: 'PUT',
+  //         headers: {'Content-Type': 'application/json'}, 
+  //         body: JSON.stringify(existingAnimal)
+  //       }).then((response) => {
+  //           return response.json()
+  //       }).then((data) => {
+  //         console.log("From put request ", data);
+  //         props.saveAnimal(data);
+  //     });
 
-  }
+  // }
 
 
 //Submit Button Event Handler----------------------------------------------------------------------------
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(animal.id_animal){
-      updateAnimal(animal);
-    } else{
-      postAnimal(animal);
-    }
+    postSighting(sighting);
+    // if(animal.id_animal){
+    //   updateAnimal(animal);
+    // } else{
+    //   postAnimal(animal);
+    // }
     
   };
 //--------------------------------------------------------------------------------------------------------
@@ -192,8 +203,10 @@ return (
   <form onSubmit={handleSubmit}>
     <fieldset>
     
+
+    {/* referencing array of animals from the animals.js component passed as props (columns nickname and id) */}
       <label>Animal Name</label>
-         <select onChange={handleAnimalDropdown}>
+         <select onChange={handleAnimalIdDropdown}>
          {props.animalsArray.map((element) => {
              return (
                <option value={element.id_animal}>
@@ -210,7 +223,7 @@ return (
         id="add-sighting-date"
         placeholder="Sighting Date"
         required
-        value={animal.date_of_sighting}
+        value={sighting.date_of_sighting}
         onChange={handleDateOfSightingChange}
       />
 
@@ -220,7 +233,7 @@ return (
         id="add-location-text"
         placeholder="Animal Location"
         required
-        value={animal.location_of_sighting}
+        value={sighting.location_of_sighting}
         onChange={handleLocationOfSightingChange}
       />
 
@@ -230,7 +243,7 @@ return (
         id="add-email"
         placeholder="Sighter Email"
         required
-        value={animal.sighter_email}
+        value={sighting.sighter_email}
         onChange={handleEmail}
       />
 
@@ -240,13 +253,13 @@ return (
         id="add-health"
         placeholder="Health Status"
         required
-        value={animal.healthy}
-        onChange={handleAnimalHealth}
+        value={sighting.healthy}
+        onChange={handleSightingHealth}
       />
 
 
     </fieldset>
-    <button type="submit">{!animal.id_animal ? "ADD": "SAVE"}</button>
+    <button type="submit">{!sighting.id_sighting ? "ADD": "SAVE"}</button>
   </form>
   </div>
 );

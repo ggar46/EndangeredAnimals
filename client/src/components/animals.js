@@ -52,9 +52,9 @@ useEffect(() => {
   }
 
 //handle the animals state function from other form component-------------------------------------------------------
-  const sendData = (animals) => {
-    setAnimals(animals);
-    console.log(animals, "here is the sendData result")
+  const sendData = (selection) => {
+    setAnimals((selection) => [...animals, selection]);
+
   }
 
 ////--------------------------------------------------------------------------------------------------------

@@ -19,8 +19,8 @@ app.get('/', (req, res) => {
 app.get('/api/animals', cors(), async (req, res) => {
   try {
     const { rows: animal } = await 
-    //db.query('SELECT * FROM animal');
-    db.query('SELECT * FROM sightings LEFT JOIN animal ON sightings.id_animal=animal.id_animal');
+    db.query('SELECT * FROM animal');
+    //db.query('SELECT * FROM sightings LEFT JOIN animal ON sightings.id_animal=animal.id_animal');
     res.send(animal);
   } catch (e) {
     return res.status(400).json({ e });
@@ -102,20 +102,20 @@ app.get('/api/species', cors(), async (req, res) => {
 
 //POST request - ANIMALS-----------------------------------------------------
 //works
-app.post('/api/animals', cors(), async (req, res) => {
-  console.log("working")
-  const newAnimal = {
-    nickname: req.body.nickname,
-    animal_record_timestamp: req.body.animal_record_timestamp
-  };
+// app.post('/api/animals', cors(), async (req, res) => {
+//   console.log("working")
+//   const newAnimal = {
+//     nickname: req.body.nickname,
+//     animal_record_timestamp: req.body.animal_record_timestamp
+//   };
   
-  const result = await db.query(
-    'INSERT INTO animal(nickname, animal_record_timestamp) VALUES($1, $2) RETURNING *',
-    [newAnimal.nickname, newAnimal.animal_record_timestamp],
-  );
-  console.log(result.rows[0]);
-  res.json(result.rows[0]);
-});
+//   const result = await db.query(
+//     'INSERT INTO animal(nickname, animal_record_timestamp) VALUES($1, $2) RETURNING *',
+//     [newAnimal.nickname, newAnimal.animal_record_timestamp],
+//   );
+//   console.log(result.rows[0]);
+//   res.json(result.rows[0]);
+// });
 
 // POST request - SIGHTINGS-----------------------------------------------------
 //does not work
