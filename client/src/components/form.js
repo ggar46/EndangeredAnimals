@@ -23,13 +23,6 @@ const Form = (props) => {
     setAnimal((animal) => ({ ...animal, nickname}));
   };
 
-
-////------------------------------------------------------------------------------------
-  // const handleTimestampChange = (event) => {
-  //   const animal_record_timestamp = event.target.value;
-  //   setAnimal((animal) => ({ ...animal, animal_record_timestamp }));
-  // };
-
 //event sighting//------------------------------------------------------------------------------------
   const handleDateOfSightingChange = (event) => {
     const date_of_sighting = event.target.value;
