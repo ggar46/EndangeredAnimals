@@ -11,10 +11,14 @@ const AnimalsForm = (props) => {
 
     //species id event handler (dropdown)____________________________________________________
     const handleSpeciesId = (event) => {
-        console.log("it's not the event handler or rendered portion, hmmm", event.target.value)
-        // const id_species = event.target.value;
-        // setAnimals((animals) => ({...animals, id_species}));
+        console.log("reaching speciesid event handler, id_species");
+        const id_species = event.target.value;
+        setAnimals((animals) => ({...animals, id_species}));
+  
     };
+
+
+
 
     //species nickname (text entry)____________________________________________________
     const handleNickname = (e) => {
@@ -45,7 +49,7 @@ const AnimalsForm = (props) => {
         e.preventDefault();
         postAnimal(animals);
         }
-
+console.log(animals);
 
     
     return(
@@ -74,6 +78,7 @@ const AnimalsForm = (props) => {
                     <option value={element.id_species}>
                       {element.species_name}
                     </option>
+                   
                   );
             })}
             </select> 

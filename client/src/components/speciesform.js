@@ -10,6 +10,24 @@ const SpeciesForm = () => {
 
     const [species, setSpecies] = useState(speciesDefault);
 
+    //Common Name Event Listener ________________________________________________________________
+    const handleCommonName = (event) => {
+        const common_name = event.target.value;
+        setSpecies((species) => ({...species, common_name}));
+    }
+
+    //Species Name Event Listener ________________________________________________________________
+    const handleSpeciesName = (event) => {
+        const species_name = event.target.value;
+        setSpecies((species) => ({...species, species_name}));
+    }
+
+    //Species Name Event Listener ________________________________________________________________
+    const handleNumberInWild = (event) => {
+        const number_in_wild = event.target.value;
+        setSpecies((species) => ({...species, number_in_wild}));
+    }
+
 
     return(
         <div>
