@@ -1,15 +1,20 @@
 import { useState, useEffect } from "react";
-import Form from "./form";
+import SightingsForm from "./sightingsform.js";
+import AnimalsForm from "./animalsform.js";
+import SpeciesForm from "./speciesform.js";
+
 
 function Animals() {
   
-
-  const [animals, setAnimals] = useState([]);
   const [editAnimalId, setEditAnimalId] = useState(null);
+  const [animals, setAnimals] = useState([]);
   const [species, setSpecies] = useState([]);
+  const [sightings, setSightings] = useState([]);
 
 
 //API CALL - SPECIES TABLE-----------------------------------------------------------------------------------
+//use if you want code to trigger if something channges on the webpage (ex: after typing, etc)
+//ex: [pst request] - 
 useEffect(() => {
   fetch("http://localhost:8085/api/species")
     .then((response) => response.json())
@@ -19,18 +24,29 @@ useEffect(() => {
 }, []);
 
 
-//API CALL - ANIMALS table//--------------------------------------------------
+//API CALL - ANIMALS table--------------------------------------------------
 useEffect(() => {
   fetch("http://localhost:8085/api/animals")
     .then((response) => response.json())
-    .then((animals) => {
-          setAnimals(animals);
+    .then((animalsdata) => {
+          setAnimals(animalsdata);
         });
 }, []);
 
+
+//API CALL - SIGHTINGS table---------------------------------------------------------------------------------------
+useEffect(() => {
+  fetch("http://localhost:8085/api/sightings")
+    .then((response) => response.json())
+    .then((sightingsdata) => {
+          setSightings(sightingsdata);
+        });
+}, []);
+
+
+
+//Set state to new animal-------------------------------------------------------------------------------------------------
   const addAnimal = (newAnimal) => {
-    //console.log(newStudent);
-    //postStudent(newStudent);
     setAnimals((animal) => [...animals, newAnimal]);
   };
 
@@ -53,7 +69,7 @@ useEffect(() => {
     setEditAnimalId(null);
   }
   
-////--------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------
   const onEdit = (animal) =>{
     console.log("This is line 26 on animal component", animal);
     const editingID = animal.id;
@@ -64,23 +80,25 @@ useEffect(() => {
 //handle the animals state function from other form component-------------------------------------------------------
   const sendData = (selection) => {
     setAnimals((selection) => [...animals, selection]);
-
   }
 
 ////--------------------------------------------------------------------------------------------------------
   return (
     <div className="animals">
-      <h1> Animal Sightings </h1>
+      <h1> Endangered Animal Sightings </h1>
 
       <h3> Enter a new sighting! </h3>
-      <Form speciesArray={species} sendData={sendData} animalsArray={animals} saveAnimal={addAnimal} />
+      <SightingsForm speciesArray={species} sendData={sendData} animalsArray={animals} saveAnimal={addAnimal} />
+      <AnimalsForm/>
+      <SpeciesForm/>
+
       <h3> List of Sightings </h3>
       <ul>
         {animals.map((animal) => {
           if(animal.id_animal === editAnimalId){
             //something needs to happento allow the user edit that existing student
             // At some point I need to pass the update function as props - connect this to the backend
-            return <Form initialAnimal={animal} saveAnimal={updateAnimal}/>
+            return <SightingsForm initialAnimal={animal} saveAnimal={updateAnimal}/>
           } else{
             return (
               <li key={animal.id_animal}>
