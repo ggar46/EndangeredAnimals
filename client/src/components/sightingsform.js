@@ -140,11 +140,11 @@ const SightingsForm = (props) => {
               value={sighting.healthy}
               onChange={handleSightingHealth}
             />
-      
-                {/* <img id="redpanda" src="https://images.ctfassets.net/cnu0m8re1exe/c175AfE5netP1i6bvd5tc/84a983d021f09be04717afa9374b4473/red_panda_lead.jpg?fm=jpg&fl=progressive&w=660&h=433&fit=fill"></img> */}
-      
+          <div>
+        
+          </div>
           </fieldset>
-         
+          
           <button id="submitSighting" type="submit">{!sighting.id_sighting ? "ADD SIGHTING": "SAVE SIGHTING"}</button>
         </form>
         </div>

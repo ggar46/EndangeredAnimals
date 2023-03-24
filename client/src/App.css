@@ -67,10 +67,16 @@ ul {
   width: 25%;
 }
 
+
 .eachAnimalInfo{
-  background-color: black;
-  margin: auto;
-  width: 50%;
-  padding: 10px;
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  max-width: 600px;
+  margin: 0 auto;
+  background: #aeca95;
+  padding: 10px 0;
+  border-style: dashed;
 }
+
+
+

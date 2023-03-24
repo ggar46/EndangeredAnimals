@@ -11,6 +11,8 @@ function Animals() {
   const [species, setSpecies] = useState([]);
   const [sightings, setSightings] = useState([]);
   const [allFields, setAllFields] = useState([]);
+  const [toggle1, setToggle1] = useState(false);
+  const [toggle, setToggle] = useState(false);
 
 
 
@@ -107,42 +109,72 @@ useEffect(() => {
   }
 
 
+
+const showSpecies = (event) => {
+  setToggle(!toggle);
+}
+
+const showAnimals = (event) => {
+  setToggle1(!toggle1);
+}
+
 ////--------------------------------------------------------------------------------------------------------
   return (
     <div className="animals">
       <h1> Endangered Animal Sightings </h1>
 
-      <SightingsForm speciesArray={species} sendData={sendData} animalsArray={animals} saveSighting={addSighting}  />
-      <AnimalsForm speciesArray={species} saveAnimal={addAnimal} sendData={sendData}/>
-      <SpeciesForm saveSpecies={addSpecies}/>
 
+      <SightingsForm speciesArray={species} sendData={sendData} animalsArray={animals} saveSighting={addSighting}  />
+     
+    
+
+{/* 
+      button that shows/hids animals form
+      <button onClick={showAnimals}>Add Animal</button>
+      {toggle1?  <AnimalsForm speciesArray={species} saveAnimal={addAnimal} sendData={sendData}/> : ""}
+
+
+      button that shows/hides species form
+      <button onClick={showSpecies}>Add Species</button>
+      {toggle? <SpeciesForm saveSpecies={addSpecies}/> : ""} */}
+
+      <button onClick={showSpecies}>Add Species</button>      <button onClick={showAnimals}>Add Animal</button>
+
+      {toggle? <SpeciesForm saveSpecies={addSpecies}/> : ""}
+      {toggle1?  <AnimalsForm speciesArray={species} saveAnimal={addAnimal} sendData={sendData}/> : ""}
 
 
 
       <h3> List of Sightings </h3>
 
-      <ul>
+     <div className="griddiv">
+      <ul className="unordered">
         {allFields.map((oneAnimal) => {
           if (oneAnimal.id_animal === editAnimalId){
             return <SightingsForm speciesArray={species} sendData={sendData} animalsArray={animals} saveSighting={addSighting}/>
           } else {
             return (
+            
               <div className="eachAnimalInfo">
-              <li key={oneAnimal.id_animal}>
-                <p>{oneAnimal.nickname} </p>
-                <p>{oneAnimal.common_name}</p>
-                <p>{oneAnimal.date_of_sighting}</p>
-                <p>{oneAnimal.location_of_sighting}</p>
-                <p>{oneAnimal.nickname} is {oneAnimal.healthy ? "healthy": "not healthy"}</p>
-                <p>Sighter Contact: {oneAnimal.sighter_email}</p>
+              <li className="listItem" key={oneAnimal.id_animal}>
+                <p className="oneAnimalText">{oneAnimal.nickname} the {oneAnimal.common_name}</p>
+               
+                  {/* <p className="oneAnimalText">{oneAnimal.common_name}</p> */}
+                  <p className="oneAnimalText">Date: {oneAnimal.date_of_sighting}</p>
+                  <p className="oneAnimalText">Spotted in {oneAnimal.location_of_sighting}</p>
+                  <p className="oneAnimalText">{oneAnimal.nickname} is {oneAnimal.healthy ? "in good health": "unwell"}</p>
+                  <p className="oneAnimalText">Sighter Email: {oneAnimal.sighter_email}</p>
 
                 <button key={oneAnimal.id_animal} type="button" onClick={() =>{onEdit(oneAnimal)}}>EDIT</button>
+    
               </li>
               </div>
+           
             )
           }
         })}
       </ul>
+      </div>
 
 
 

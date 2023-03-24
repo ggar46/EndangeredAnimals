@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
 app.get('/api/allfields', cors(), async (req, res) => {
   try {
     const { rows: sightings } = await 
-    db.query('SELECT * FROM sightings INNER JOIN animal ON sightings.id_animal=animal.id_animal INNER JOIN species ON species.id_species=animal.id_species');
+    db.query('SELECT animal.nickname, species.common_name, sightings.date_of_sighting, sightings.location_of_sighting, sightings.healthy, sightings.sighter_email FROM sightings INNER JOIN animal ON sightings.id_animal=animal.id_animal INNER JOIN species ON species.id_species=animal.id_species');
     console.log
     res.send(sightings);
     console.log("All data coming up!", sightings);
