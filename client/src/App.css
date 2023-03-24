@@ -53,7 +53,7 @@
 label {
   display: inline-block;
   text-align: left;
-  width: 500px;
+  width: 50%;
  } 
 
 ul {
@@ -69,14 +69,24 @@ ul {
 
 
 .eachAnimalInfo{
-  display: flex;
-  justify-content: space-between;
-  max-width: 600px;
+  /* display: flex;
+  justify-content: space-between; */
+  max-width: 500px;
   margin: 0 auto;
   background: #aeca95;
   padding: 10px 0;
   border-style: dashed;
 }
 
+.space{
+  height: 30px;
+}
 
 
+h1{
+  padding-top: 10px;
+}
+
+h3{
+  text-align: center;
+}

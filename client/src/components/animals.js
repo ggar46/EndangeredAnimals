@@ -125,28 +125,23 @@ const showAnimals = (event) => {
 
 
       <SightingsForm speciesArray={species} sendData={sendData} animalsArray={animals} saveSighting={addSighting}  />
-     
-    
+      <button onClick={showSpecies}>Add New Species</button>       <button onClick={showAnimals}>Add New Animal</button>
 
-{/* 
-      button that shows/hids animals form
-      <button onClick={showAnimals}>Add Animal</button>
-      {toggle1?  <AnimalsForm speciesArray={species} saveAnimal={addAnimal} sendData={sendData}/> : ""}
-
-
-      button that shows/hides species form
-      <button onClick={showSpecies}>Add Species</button>
-      {toggle? <SpeciesForm saveSpecies={addSpecies}/> : ""} */}
-
-      <button onClick={showSpecies}>Add Species</button>      <button onClick={showAnimals}>Add Animal</button>
 
       {toggle? <SpeciesForm saveSpecies={addSpecies}/> : ""}
       {toggle1?  <AnimalsForm speciesArray={species} saveAnimal={addAnimal} sendData={sendData}/> : ""}
+    
+      <div class="space">
 
 
 
+
+      </div>
       <h3> List of Sightings </h3>
+      <div class="space">
 
+
+      </div>
      <div className="griddiv">
       <ul className="unordered">
         {allFields.map((oneAnimal) => {
@@ -161,11 +156,13 @@ const showAnimals = (event) => {
                
                   {/* <p className="oneAnimalText">{oneAnimal.common_name}</p> */}
                   <p className="oneAnimalText">Date: {oneAnimal.date_of_sighting}</p>
+                  <p className="oneAnimalText">Sighter Email: {oneAnimal.sighter_email}</p>
                   <p className="oneAnimalText">Spotted in {oneAnimal.location_of_sighting}</p>
                   <p className="oneAnimalText">{oneAnimal.nickname} is {oneAnimal.healthy ? "in good health": "unwell"}</p>
-                  <p className="oneAnimalText">Sighter Email: {oneAnimal.sighter_email}</p>
+                  
 
-                <button key={oneAnimal.id_animal} type="button" onClick={() =>{onEdit(oneAnimal)}}>EDIT</button>
+                {/* <button key={oneAnimal.id_animal} type="button" onClick={() =>{onEdit(oneAnimal)}}>EDIT</button> */}
+                
     
               </li>
               </div>
@@ -174,6 +171,10 @@ const showAnimals = (event) => {
           }
         })}
       </ul>
+
+
+
+
       </div>
 
 
