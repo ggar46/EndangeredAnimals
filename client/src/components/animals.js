@@ -117,10 +117,37 @@ useEffect(() => {
       <SpeciesForm saveSpecies={addSpecies}/>
 
 
-      
-{console.log(allFields[0], "all fields worksss!!!")}
+
+
       <h3> List of Sightings </h3>
+
       <ul>
+        {allFields.map((oneAnimal) => {
+          if (oneAnimal.id_animal === editAnimalId){
+            return <SightingsForm speciesArray={species} sendData={sendData} animalsArray={animals} saveSighting={addSighting}/>
+          } else {
+            return (
+              <div className="eachAnimalInfo">
+              <li key={oneAnimal.id_animal}>
+                <p>{oneAnimal.nickname} </p>
+                <p>{oneAnimal.common_name}</p>
+                <p>{oneAnimal.date_of_sighting}</p>
+                <p>{oneAnimal.location_of_sighting}</p>
+                <p>{oneAnimal.nickname} is {oneAnimal.healthy ? "healthy": "not healthy"}</p>
+                <p>Sighter Contact: {oneAnimal.sighter_email}</p>
+
+                <button key={oneAnimal.id_animal} type="button" onClick={() =>{onEdit(oneAnimal)}}>EDIT</button>
+              </li>
+              </div>
+            )
+          }
+        })}
+      </ul>
+
+
+
+
+      {/* <ul>
         {animals.map((animal) => {
           if(animal.id_animal === editAnimalId){
             //something needs to happento allow the user edit that existing student
@@ -135,9 +162,7 @@ useEffect(() => {
             )
           }
         })}
-
-
-      </ul>
+      </ul> */}
      
     </div>
   );
