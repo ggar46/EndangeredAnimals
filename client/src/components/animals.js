@@ -123,24 +123,16 @@ const showAnimals = (event) => {
     <div className="animals">
       <h1> Endangered Animal Sightings </h1>
 
-
       <SightingsForm speciesArray={species} sendData={sendData} animalsArray={animals} saveSighting={addSighting}  />
       <button onClick={showSpecies}>Add New Species</button>       <button onClick={showAnimals}>Add New Animal</button>
-
 
       {toggle? <SpeciesForm saveSpecies={addSpecies}/> : ""}
       {toggle1?  <AnimalsForm speciesArray={species} saveAnimal={addAnimal} sendData={sendData}/> : ""}
     
       <div class="space">
-
-
-
-
       </div>
       <h3> List of Sightings </h3>
       <div class="space">
-
-
       </div>
      <div className="griddiv">
       <ul className="unordered">
@@ -152,15 +144,15 @@ const showAnimals = (event) => {
             
               <div className="eachAnimalInfo">
               <li className="listItem" key={oneAnimal.id_animal}>
-                <p className="oneAnimalText">{oneAnimal.nickname} the {oneAnimal.common_name}</p>
-               
+                <span id="animalName">
+                  <p>{oneAnimal.nickname} the {oneAnimal.common_name}</p>
+                </span>
                   {/* <p className="oneAnimalText">{oneAnimal.common_name}</p> */}
                   <p className="oneAnimalText">Date: {oneAnimal.date_of_sighting}</p>
                   <p className="oneAnimalText">Sighter Email: {oneAnimal.sighter_email}</p>
                   <p className="oneAnimalText">Spotted in {oneAnimal.location_of_sighting}</p>
                   <p className="oneAnimalText">{oneAnimal.nickname} is {oneAnimal.healthy ? "in good health": "unwell"}</p>
                   
-
                 {/* <button key={oneAnimal.id_animal} type="button" onClick={() =>{onEdit(oneAnimal)}}>EDIT</button> */}
               </li>
               </div>

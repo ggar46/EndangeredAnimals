@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Carter+One&display=swap');
+
 .App {
   text-align: center;
 }
@@ -89,4 +91,16 @@ h1{
 
 h3{
   text-align: center;
+}
+
+#animalName{
+  color:aquamarine;
+  font-weight: 800;
+  text-align: center;
+}
+
+.oneAnimalText{
+  font-weight: 400;
+  text-align: left;
+  padding-left: 25%;
 }
