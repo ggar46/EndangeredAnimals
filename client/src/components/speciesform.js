@@ -1,6 +1,6 @@
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 
-const SpeciesForm = () => {
+const SpeciesForm = (props) => {
     
     const speciesDefault = {       
                             common_name: "", 
@@ -29,24 +29,26 @@ const SpeciesForm = () => {
     }
 
     //Post request
-    // const postSpecies = (newSpecies) => {
-    //     return fetch("http://localhost:8085/api/postspecies", {
-    //       method: "POST",
-    //       headers: { "Content-Type": "application/json" },
-    //       body: JSON.stringify(newSpecies),
-    //     })
-    //       .then((response) => {
-    //         return response.json();
-    //       })
-    //       .then((data) => {
-    //         props.saveSpecies(data);
-    //       });
-    //     };
+    const postSpecies = (newSpecies) => {
+        return fetch("http://localhost:8085/api/postspecies", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(newSpecies),
+        })
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            props.saveSpecies(data);
+          });
+        };
+
+
     //Submit Button event handler
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(species);
-        // postSpecies(species);
+        postSpecies(species);
     }
 
 
