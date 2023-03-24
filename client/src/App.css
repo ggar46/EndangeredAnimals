@@ -37,13 +37,15 @@
   }
 }
 
+#submitSighting{
+  text-align: center !important;
+  background-color: aquamarine;
+}
+
 #formdiv{
   margin: auto;
   width: 50%;
   padding: 10px;
-}
-
-form{
   text-align: left;
 }
 
@@ -53,6 +55,13 @@ label {
   text-align: left;
   width: 500px;
  } 
+
+ul {
+  text-align: center;
+  list-style-position: inside;
+  list-style-type: none;
+}
+
 
 
 

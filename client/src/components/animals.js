@@ -70,9 +70,12 @@ useEffect(() => {
 ////--------------------------------------------------------------------------------------------------------
   return (
     <div className="animals">
-      <h2> List of Animals </h2>
-      <ul>
+      <h1> Animal Sightings </h1>
 
+      <h3> Enter a new sighting! </h3>
+      <Form speciesArray={species} sendData={sendData} animalsArray={animals} saveAnimal={addAnimal} />
+      <h3> List of Sightings </h3>
+      <ul>
         {animals.map((animal) => {
           if(animal.id_animal === editAnimalId){
             //something needs to happento allow the user edit that existing student
@@ -87,7 +90,7 @@ useEffect(() => {
           }
         })}
       </ul>
-      <Form speciesArray={species} sendData={sendData} animalsArray={animals} saveAnimal={addAnimal} />
+     
     </div>
   );
 }

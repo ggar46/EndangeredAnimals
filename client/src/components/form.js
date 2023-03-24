@@ -272,7 +272,8 @@ return (
 
 
     </fieldset>
-    <button type="submit">{!sighting.id_sighting ? "ADD SIGHTING": "SAVE SIGHTING"}</button>
+   
+    <button id="submitSighting" type="submit">{!sighting.id_sighting ? "ADD SIGHTING": "SAVE SIGHTING"}</button>
   </form>
   </div>
 );
