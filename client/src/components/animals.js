@@ -131,7 +131,7 @@ const showAnimals = (event) => {
     
       <div class="space">
       </div>
-      <h3> List of Sightings </h3>
+      <h3>  List of Sightings </h3>
       <div class="space">
       </div>
      <div className="griddiv">
