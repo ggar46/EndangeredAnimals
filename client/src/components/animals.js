@@ -46,9 +46,15 @@ useEffect(() => {
 
 
 //Set state to new animal-------------------------------------------------------------------------------------------------
-  const addAnimal = (newAnimal) => {
-    setAnimals((animal) => [...animals, newAnimal]);
-  };
+  // const addAnimal = (newAnimal) => {
+  //   setAnimals((animal) => [...animals, newAnimal]);
+  // };
+
+
+//set state to new sightings-------------------------------------------------------------------------------------------------
+  const addSighting = (newSighting) => {
+    setSightings((sighting) => [...sightings, newSighting]);
+};
 
 //A function to control the update in the parent (student component)--------------------------------
   const updateAnimal = (savedAnimal) =>{
@@ -82,15 +88,17 @@ useEffect(() => {
     setAnimals((selection) => [...animals, selection]);
   }
 
+
 ////--------------------------------------------------------------------------------------------------------
   return (
     <div className="animals">
       <h1> Endangered Animal Sightings </h1>
 
       <h3> Enter a new sighting! </h3>
-      <SightingsForm speciesArray={species} sendData={sendData} animalsArray={animals} saveAnimal={addAnimal} />
-      <AnimalsForm/>
-      <SpeciesForm/>
+      <SightingsForm speciesArray={species} sendData={sendData} animalsArray={animals} saveSighting={addSighting} /><AnimalsForm/><SpeciesForm/>
+
+
+      
 
       <h3> List of Sightings </h3>
       <ul>

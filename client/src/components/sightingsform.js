@@ -5,10 +5,10 @@ const SightingsForm = (props) => {
     const initialSighting = {
                        
         nickname: "", 
-        animal_record_timestamp: "",
         date_of_sighting: "",
         location_of_sighting: "",
-        id_animal: "",
+        id_animal: null,
+        sighter_email: "",
         healthy: "",
         };
 
@@ -29,8 +29,8 @@ const SightingsForm = (props) => {
 
     //email-----------------------------------------------------------------------------------
   const handleEmail = (event) => {
-    const email = event.target.value;
-    setSighting((sighting) => ({ ...sighting, email}));
+    const sighter_email = event.target.value;
+    setSighting((sighting) => ({ ...sighting, sighter_email}));
   }
 
     //health---------------------------------------------------------------------------------
@@ -39,6 +39,16 @@ const SightingsForm = (props) => {
     setSighting((sighting) => ({ ...sighting, healthy}));
   }
 
+
+  //id---------------------------------------------------------------------------------
+    const handleChange = (e) => {
+        const id_animal = e.target.value;
+        console.log("this is the animal id", e.target.value);
+        setSighting((sighting) => ({ ...sighting, id_animal}));
+    };
+
+
+    console.log(sighting);
     //POST request to handle new SIGHTINGS//-----------------------------------------------------------------
     const postSighting = (newSighting) => {
     console.log("I am in my post request");
@@ -53,7 +63,7 @@ const SightingsForm = (props) => {
       .then((data) => {
         console.log("From the post ", data);
         console.log("postSighting is working")
-        setSighting((sighting) => ({ ...sighting, data}));
+        props.saveSighting(data);
       });
     };
 
@@ -69,7 +79,7 @@ const SightingsForm = (props) => {
           <fieldset>
           {/* referencing array of animals from the animals.js component passed as props (columns nickname and id) */}
             <label>Animal Name</label>
-               <select>
+               <select  onChange={handleChange}>
                {props.animalsArray.map((element) => {
                    return (
                      <option value={element.id_animal}>
@@ -89,7 +99,6 @@ const SightingsForm = (props) => {
                     </option>
                   );
                 })}
-                <option value={-1}>add a new species</option>
               </select>
       
             <label>Date of Sighting</label>

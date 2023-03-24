@@ -83,16 +83,17 @@ app.post('/api/postanimals', cors(), async (req, res) => {
 //does not work
 //Recommendation: Put both post requests into the same one to make things easier front-end
 app.post('/api/postsightings', cors(), async (req, res) => {
-  console.log("working")
+  console.log("post sightings is working")
    const newSighting = {
+    id_animal: req.body.id_animal,
     date_of_sighting: req.body.date_of_sighting,
     location_of_sighting: req.body.location_of_sighting,
     sighter_email: req.body.sighter_email,
     healthy: req.body.healthy
   };
   const result = await db.query(
-    'INSERT INTO sightings(date_of_sighting, location_of_sighting, healthy) VALUES($1, $2, $3, $4) RETURNING *',
-    [newSighting.date_of_sighting, newSighting.location_of_sighting, newSighting.sighter_email, newSighting.healthy],
+    'INSERT INTO sightings(id_animal, date_of_sighting, location_of_sighting, sighter_email, healthy) VALUES($1, $2, $3, $4, $5) RETURNING *',
+    [newSighting.id_animal, newSighting.date_of_sighting, newSighting.location_of_sighting, newSighting.sighter_email, newSighting.healthy],
   );
   
   res.json(result.rows[0]);
