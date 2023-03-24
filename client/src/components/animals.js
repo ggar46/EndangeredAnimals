@@ -27,8 +27,7 @@ useEffect(() => {
 
   
 //API CALL - SPECIES TABLE-----------------------------------------------------------------------------------
-//use if you want code to trigger if something channges on the webpage (ex: after typing, etc)
-//ex: [pst request] - 
+//use if you want code to trigger if something channges on the webpage (ex: after typing, etc) 
 useEffect(() => {
   fetch("http://localhost:8085/api/species")
     .then((response) => response.json())
@@ -108,8 +107,7 @@ useEffect(() => {
     setAnimals((selection) => [...animals, selection]);
   }
 
-
-
+//Toggle Functions------------------------------------------------------------------------------------------------------
 const showSpecies = (event) => {
   setToggle(!toggle);
 }
@@ -118,7 +116,9 @@ const showAnimals = (event) => {
   setToggle1(!toggle1);
 }
 
-////--------------------------------------------------------------------------------------------------------
+
+
+
   return (
     <div className="animals">
       <h1> Endangered Animal Sightings </h1>
