@@ -15,15 +15,29 @@ app.get('/', (req, res) => {
 });
 
 
+//GET request - ALL TABLES---------------------------------------------------------
+app.get('/api/allfields', cors(), async (req, res) => {
+  try {
+    const { rows: sightings } = await 
+    db.query('SELECT * FROM sightings LEFT JOIN animal ON sightings.id_animal=animal.id_animal INNER JOIN species ON species.id_species=animal.id_species');
+    console.log
+    res.send(sightings);
+    console.log("All data coming up!", sightings);
+  } catch (e) {
+    return res.status(400).json({ e });
+  }
+});
+
+
 
 //GET request - ANIMALS---------------------------------------------------------
 //as long as both tables share a field, you can join on them, usually a key but doesn't have to be
 app.get('/api/animals', cors(), async (req, res) => {
   try {
-    const { rows: animal } = await 
+    const { rows: animals } = await 
     db.query('SELECT * FROM animal');
     //db.query('SELECT * FROM sightings LEFT JOIN animal ON sightings.id_animal=animal.id_animal');
-    res.send(animal);
+    res.send(animals);
   } catch (e) {
     return res.status(400).json({ e });
   }

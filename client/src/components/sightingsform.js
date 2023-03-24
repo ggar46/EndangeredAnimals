@@ -48,7 +48,6 @@ const SightingsForm = (props) => {
     };
 
 
-    console.log(sighting);
     //POST request to handle new SIGHTINGS//-----------------------------------------------------------------
     const postSighting = (newSighting) => {
     console.log("I am in my post request");
@@ -76,6 +75,7 @@ const SightingsForm = (props) => {
     return (
         <div  id="formdiv">
         <form onSubmit={handleSubmit}>
+        <h3> Enter a new sighting! </h3>
           <fieldset>
           {/* referencing array of animals from the animals.js component passed as props (columns nickname and id) */}
             <label>Animal Name</label>
@@ -95,7 +95,7 @@ const SightingsForm = (props) => {
               {props.speciesArray.map((element) => {
                   return (
                     <option value={element.id_species}>
-                      {element.species_name}{" "}
+                      {element.common_name}{" "}
                     </option>
                   );
                 })}

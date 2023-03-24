@@ -76,7 +76,7 @@ console.log(animals);
               {props.speciesArray.map((element) => {
                   return (
                     <option value={element.id_species}>
-                      {element.species_name}
+                      {element.common_name}
                     </option>
                    
                   );

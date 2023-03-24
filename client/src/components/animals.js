@@ -10,8 +10,20 @@ function Animals() {
   const [animals, setAnimals] = useState([]);
   const [species, setSpecies] = useState([]);
   const [sightings, setSightings] = useState([]);
+  const [allFields, setAllFields] = useState([]);
 
 
+
+//API CALL - ALL FIELDS----------------------------------------------------------------------------------------
+useEffect(() => {
+  fetch("http://localhost:8085/api/allfields")
+    .then((response) => response.json())
+    .then((fieldsData) => {
+          setAllFields(fieldsData);
+        });
+}, []);
+
+  
 //API CALL - SPECIES TABLE-----------------------------------------------------------------------------------
 //use if you want code to trigger if something channges on the webpage (ex: after typing, etc)
 //ex: [pst request] - 
@@ -100,29 +112,31 @@ useEffect(() => {
     <div className="animals">
       <h1> Endangered Animal Sightings </h1>
 
-      <h3> Enter a new sighting! </h3>
       <SightingsForm speciesArray={species} sendData={sendData} animalsArray={animals} saveSighting={addSighting}  />
-      <AnimalsForm speciesArray={species} saveAnimal={addAnimal}/>
+      <AnimalsForm speciesArray={species} saveAnimal={addAnimal} sendData={sendData}/>
       <SpeciesForm saveSpecies={addSpecies}/>
 
 
       
-
+{console.log(allFields[0], "all fields worksss!!!")}
       <h3> List of Sightings </h3>
       <ul>
         {animals.map((animal) => {
           if(animal.id_animal === editAnimalId){
             //something needs to happento allow the user edit that existing student
             // At some point I need to pass the update function as props - connect this to the backend
-            return <SightingsForm initialAnimal={animal} saveAnimal={updateAnimal}/>
+            return <SightingsForm speciesArray={species} sendData={sendData} animalsArray={animals} saveSighting={addSighting}/>
           } else{
             return (
               <li key={animal.id_animal}>
-           {animal.nickname} <button key={animal.id_animal} type="button" onClick={() =>{onEdit(animal)}}>EDIT</button>
+                {animal.nickname} 
+                <button key={animal.id_animal} type="button" onClick={() =>{onEdit(animal)}}>EDIT</button>
               </li>
             )
           }
         })}
+
+
       </ul>
      
     </div>
@@ -130,3 +144,7 @@ useEffect(() => {
 }
 
 export default Animals;
+
+
+//we are mapping throught the array of objects that is the state animals (NOT the component)
+//we need to map through a state that contains the values that I want
