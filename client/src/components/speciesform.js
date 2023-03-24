@@ -28,13 +28,73 @@ const SpeciesForm = () => {
         setSpecies((species) => ({...species, number_in_wild}));
     }
 
+    //Post request
+    // const postSpecies = (newSpecies) => {
+    //     return fetch("http://localhost:8085/api/postspecies", {
+    //       method: "POST",
+    //       headers: { "Content-Type": "application/json" },
+    //       body: JSON.stringify(newSpecies),
+    //     })
+    //       .then((response) => {
+    //         return response.json();
+    //       })
+    //       .then((data) => {
+    //         props.saveSpecies(data);
+    //       });
+    //     };
+    //Submit Button event handler
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(species);
+        // postSpecies(species);
+    }
+
+
+
 
     return(
-        <div>
 
-        </div>
+        <div  id="formdiv">
+        <h3>Add a new species</h3>
+        <form onSubmit={handleSubmit}>
+          <fieldset>
+
+            <label>Common Name</label>
+            <input
+              type="text"
+              id="add-common-name"
+              placeholder="Enter common name"
+              required
+              value={species.common_name}
+              onChange={handleCommonName}
+            />
+
+            <label>Species Name</label>
+            <input
+              type="text"
+              id="add-species-name"
+              placeholder="Species Name"
+              required
+              value={species.species_name}
+              onChange={handleSpeciesName}
+            />
+
+
+            <label>Number in the Wild</label>
+            <input
+              type="integer"
+              id="add-number-in-wild"
+              placeholder="Enter number"
+              required
+              value={species.number_in_wild}
+              onChange={handleNumberInWild}
+            />
+
+          </fieldset>
+          <button id="submitSpecies" type="submit">{!species.id_species ? "ADD SPECIES": "SAVE SPECIES"}</button>
+        </form>
+    </div>
     )
-
 }
 
 export default SpeciesForm;
