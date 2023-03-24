@@ -18,8 +18,6 @@ const AnimalsForm = (props) => {
     };
 
 
-
-
     //species nickname (text entry)____________________________________________________
     const handleNickname = (e) => {
         const nickname = e.target.value;

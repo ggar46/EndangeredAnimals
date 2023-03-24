@@ -162,47 +162,15 @@ const showAnimals = (event) => {
                   
 
                 {/* <button key={oneAnimal.id_animal} type="button" onClick={() =>{onEdit(oneAnimal)}}>EDIT</button> */}
-                
-    
               </li>
               </div>
-           
             )
           }
         })}
       </ul>
-
-
-
-
       </div>
-
-
-
-
-      {/* <ul>
-        {animals.map((animal) => {
-          if(animal.id_animal === editAnimalId){
-            //something needs to happento allow the user edit that existing student
-            // At some point I need to pass the update function as props - connect this to the backend
-            return <SightingsForm speciesArray={species} sendData={sendData} animalsArray={animals} saveSighting={addSighting}/>
-          } else{
-            return (
-              <li key={animal.id_animal}>
-                {animal.nickname} 
-                <button key={animal.id_animal} type="button" onClick={() =>{onEdit(animal)}}>EDIT</button>
-              </li>
-            )
-          }
-        })}
-      </ul> */}
-     
     </div>
   );
 }
 
 export default Animals;
-
-
-//we are mapping throught the array of objects that is the state animals (NOT the component)
-//we need to map through a state that contains the values that I want
