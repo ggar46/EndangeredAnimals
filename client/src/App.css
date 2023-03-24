@@ -37,7 +37,7 @@
   }
 }
 
-#submitSighting{
+#submitSighting, #submitAnimal{
   text-align: center !important;
   background-color: aquamarine;
 }

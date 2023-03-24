@@ -46,9 +46,9 @@ useEffect(() => {
 
 
 //Set state to new animal-------------------------------------------------------------------------------------------------
-  // const addAnimal = (newAnimal) => {
-  //   setAnimals((animal) => [...animals, newAnimal]);
-  // };
+  const addAnimal = (newAnimal) => {
+    setAnimals((animal) => [...animals, newAnimal]);
+  };
 
 
 //set state to new sightings-------------------------------------------------------------------------------------------------
@@ -95,7 +95,9 @@ useEffect(() => {
       <h1> Endangered Animal Sightings </h1>
 
       <h3> Enter a new sighting! </h3>
-      <SightingsForm speciesArray={species} sendData={sendData} animalsArray={animals} saveSighting={addSighting} /><AnimalsForm/><SpeciesForm/>
+      <SightingsForm speciesArray={species} sendData={sendData} animalsArray={animals} saveSighting={addSighting}  />
+      <AnimalsForm speciesArray={species} saveAnimal={addAnimal}/>
+      <SpeciesForm/>
 
 
       
