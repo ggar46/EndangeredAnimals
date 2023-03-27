@@ -1,8 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Carter+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
 .App {
   text-align: center;
+
 }
 
-.App-logo {
+/* .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
@@ -11,8 +14,8 @@
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-}
-
+} */
+/* 
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -22,9 +25,9 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
+} */
 
-.App-link {
+/* .App-link {
   color: #61dafb;
 }
 
@@ -35,4 +38,91 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+#submitSighting, #submitAnimal, #submitSpecies, button {
+  text-align: center !important;
+  background-color: #f09393;
 }
+
+
+
+#formdiv{
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+  text-align: left;
+}
+
+
+label {
+  display: inline-block;
+  text-align: left;
+  width: 50%;
+ } 
+
+ul {
+  text-align: center;
+  list-style-position: inside;
+  list-style-type: none;
+}
+
+
+#redpanda{
+  width: 25%;
+}
+
+
+.eachAnimalInfo{
+  /* display: flex;
+  justify-content: space-between; */
+  max-width: 500px;
+  margin: 0 auto;
+  background:#a6c79d;
+  padding: 10px 0;
+  border-style: dashed;
+}
+
+.space{
+  height: 30px;
+}
+
+
+h1{
+  padding-top: 10px;
+  font-family: 'Carter One', cursive;
+  font-weight: 600;
+  color: #fffffe;
+}
+
+h3{
+  text-align: center;
+  font-family: 'Nunito', sans-serif;
+  color: #ffffff;
+}
+
+#animalName{
+  color:#ffffff;
+  font-weight: 800;
+  text-align: center;
+}
+
+.oneAnimalText{
+  font-weight: 400;
+  text-align: left;
+  padding-left: 25%;
+}
+
+input{
+  width: 40%
+}
+
+input[type=text] {
+  background-color: #fcfcfc;
+}
+
+fieldset{
+  border-style: solid;
+  background-color: #bdd2cb;
+}
+

@@ -5,6 +5,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  size: 1200px;
+  background-color: #6cac5c;
+  color: #000000;
+  font-family: 'Nunito', sans-serif;
 }
 
 code {
